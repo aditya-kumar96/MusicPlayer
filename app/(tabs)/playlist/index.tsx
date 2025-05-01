@@ -1,10 +1,10 @@
 import { defaultStyles } from "@/styles"
 import { Text, View } from "react-native"
 
-const SongsScreen= ()=>{
+const PlaylistScreen= ()=>{
     return <View style={defaultStyles.container}> 
-        <Text style={defaultStyles.text}>Songs Screen</Text>
+        <Text style={defaultStyles.text}>Playlist Screen</Text>
     </View>
 }
 
-export default SongsScreen
+export default PlaylistScreen
