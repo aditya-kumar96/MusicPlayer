@@ -5,30 +5,32 @@ import { StyleSheet, Text, TouchableHighlight, View } from "react-native"
 import FastImage from "react-native-fast-image"
 
 export type TrackListItemProps = {
-    track: { title: string, image?: string ,artist?:string }
+    track: { title: string, image?: string, artist?: string }
 }
 export const TracksListItem = ({ track }: TrackListItemProps) => {
     const isActiveTrack = false
-
-    return <TouchableHighlight>
-        <View>
-            <FastImage source={{
-                uri: track.image ?? unknownTrackImageUri,
-                priority: FastImage.priority.normal 
-            }}
-                style={{
-                    ...styles.trackArtworkImage,
-                    opacity: isActiveTrack ? 0.6 : 1
+    return (
+    <TouchableHighlight>
+        <View style={styles.trackItemContainer}>
+            <View>
+                <FastImage source={{
+                    uri: track.image ?? unknownTrackImageUri,
+                    priority: FastImage.priority.normal
                 }}
-            />
-        {/* Track Title + Artist */}
-                <View style={{width:'100%'}}>
-                    <Text 
-                    numberOfLines={1}
                     style={{
-                        ...styles.trackTitleText,
-                        color : isActiveTrack ? colors.primary : colors.text
+                        ...styles.trackArtworkImage,
+                        opacity: isActiveTrack ? 0.6 : 1
                     }}
+                />
+                </View>
+                {/* Track Title + Artist */}
+                <View style={{ width: '100%' }}>
+                    <Text
+                        numberOfLines={1}
+                        style={{
+                            ...styles.trackTitleText,
+                            color: isActiveTrack ? colors.primary : colors.text
+                        }}
                     >{track.title}</Text>
                     {
                         track.artist && (
@@ -38,9 +40,11 @@ export const TracksListItem = ({ track }: TrackListItemProps) => {
                             >{track.artist}</Text>
                         )
                     }
-                </View>
+                
+            </View>
         </View>
     </TouchableHighlight>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -49,16 +53,23 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50
     },
-    trackTitleText:{
+    trackTitleText: {
         ...defaultStyles.text,
-        fontSize:fontSize.sm,
-        fontWeight:'600',
-        maxWidth:'90%'
+        fontSize: fontSize.sm,
+        fontWeight: '600',
+        maxWidth: '90%'
     },
-    trackArtistText:{
+    trackArtistText: {
         ...defaultStyles.text,
-        color:colors.textMuted,
-        fontSize:14,
-        marginTop:4
+        color: colors.text,
+        fontSize: 14,
+        marginTop: 4
+    },
+    trackItemContainer: {
+        flexDirection: 'row',
+        columnGap: 14,
+        alignItems: 'center',
+        // paddingRight: 20,
+        padding:5
     }
 })

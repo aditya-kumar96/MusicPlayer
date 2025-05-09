@@ -12,5 +12,9 @@ import { StyleSheet } from "react-native"
     });
 
 export const utilStyles = StyleSheet.create({
-    
+    itemSeparator:{
+        borderColor:colors.textMuted,
+        borderWidth:StyleSheet.hairlineWidth,
+        opacity:0.3
+    }
 })
