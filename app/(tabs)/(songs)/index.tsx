@@ -7,6 +7,7 @@ const SongsScreen = () => {
     return (
     
         <ScrollView
+        
             contentInsetAdjustmentBehavior="automatic"
             style={[defaultStyles.container,{paddingHorizontal:screenPadding.horizontal}]}>
             <TracksList scrollEnabled={false} />
