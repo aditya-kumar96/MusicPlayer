@@ -3,18 +3,21 @@ import { colors, fontSize } from "@/constants/tokens"
 import { defaultStyles } from "@/styles"
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native"
 import FastImage from "react-native-fast-image"
+import { Track, useActiveTrack } from "react-native-track-player"
+import {Entypo} from '@expo/vector-icons'
 
 export type TrackListItemProps = {
-    track: { title: string, image?: string, artist?: string }
+    track: Track,
+    onTrackSelect:(track:Track)=>void
 }
-export const TracksListItem = ({ track }: TrackListItemProps) => {
-    const isActiveTrack = false
+export const TracksListItem = ({ track , onTrackSelect:handleTrackSelect}: TrackListItemProps) => {
+    const isActiveTrack = useActiveTrack()?.url === track.url
     return (
-    <TouchableHighlight>
+    <TouchableHighlight onPress={()=>handleTrackSelect(track)}>
         <View style={styles.trackItemContainer}>
             <View>
                 <FastImage source={{
-                    uri: track.image ?? unknownTrackImageUri,
+                    uri: track.artwork ?? unknownTrackImageUri,
                     priority: FastImage.priority.normal
                 }}
                     style={{
@@ -23,8 +26,9 @@ export const TracksListItem = ({ track }: TrackListItemProps) => {
                     }}
                 />
                 </View>
-                {/* Track Title + Artist */}
-                <View style={{ width: '100%' }}>
+                <View style={styles.threedots}>
+                    {/* Track Title + Artist */}
+                <View style={{ width: '95%' }}>
                     <Text
                         numberOfLines={1}
                         style={{
@@ -42,6 +46,10 @@ export const TracksListItem = ({ track }: TrackListItemProps) => {
                     }
                 
             </View>
+            <Entypo name="dots-three-horizontal" size={18} color={colors.icon}/>
+        </View>
+                
+                
         </View>
     </TouchableHighlight>
     )
@@ -71,5 +79,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         // paddingRight: 20,
         padding:5
+    },
+    threedots:{
+        flex:1,
+        flexDirection:'row',
+        justifyContent:'space-around',
+        alignItems:'center'
     }
 })

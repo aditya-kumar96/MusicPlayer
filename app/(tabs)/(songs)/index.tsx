@@ -14,14 +14,13 @@ const SongsScreen = () => {
             }
         })
     
-//filter the songs 
+
 const filteredSongs = useMemo(()=>{
     if(!search) return library;
     return library.filter(trackTitleFilter(search))
 },[search,library])
 
     return (
-    
         <ScrollView
             contentInsetAdjustmentBehavior="automatic"
             style={[defaultStyles.container,{paddingHorizontal:screenPadding.horizontal}]}>
