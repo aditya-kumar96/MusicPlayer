@@ -7,13 +7,14 @@ import library from '@/assets/data/library.json'
 import { useMemo } from "react"
 import { trackTitleFilter } from "@/helpers/filter"
 const SongsScreen = () => {
+     //searchbar hook
      const search = useNavigationSearch({
             searchBarOptions:{
                 placeholder:'Search in songs'
             }
         })
     
-
+//filter the songs 
 const filteredSongs = useMemo(()=>{
     if(!search) return library;
     return library.filter(trackTitleFilter(search))
@@ -24,6 +25,7 @@ const filteredSongs = useMemo(()=>{
         <ScrollView
             contentInsetAdjustmentBehavior="automatic"
             style={[defaultStyles.container,{paddingHorizontal:screenPadding.horizontal}]}>
+             
             <TracksList tracks={filteredSongs} scrollEnabled={false} />
         </ScrollView>
     
