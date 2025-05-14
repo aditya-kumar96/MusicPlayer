@@ -1,6 +1,7 @@
 import { Event,useTrackPlayerEvents } from "react-native-track-player";
 const events = [Event.PlaybackError,Event.PlaybackState,Event.PlaybackActiveTrackChanged]
 
+//create custom hook for log the error when TrackPlayer is initialized
 export const useLogTrackPlayerState = ()=>{
     useTrackPlayerEvents(events,async (event)=>{
         if (event.type === Event.PlaybackError) {
